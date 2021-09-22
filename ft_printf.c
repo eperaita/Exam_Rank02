@@ -6,7 +6,7 @@
 /*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 10:49:16 by eperaita          #+#    #+#             */
-/*   Updated: 2021/09/22 14:58:54 by eperaita         ###   ########.fr       */
+/*   Updated: 2021/09/22 15:59:55 by eperaita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void ft_putnbr(long int nbr, int base)
 {
-	char  n;
+	int  n;			//OJO! int !
 	char *hexa;
 	char *dec;
 
@@ -37,6 +37,11 @@ int ft_print(long int nbr, int base)
     int len;
 
     len = 0;
+	if (nbr == 0) //OJO! Si es cero, print 0 y return!
+	{
+		len += write(1, "0", 1);
+		return (len);
+	}
     if (nbr < 0)
     {
         len += write(1, "-", 1);
@@ -51,13 +56,16 @@ int ft_print(long int nbr, int base)
 	return (len);
 }
 
-int ft_putstr(char *str)
+int ft_putstr(char *str) //OJO! Si es null (null)
 {
     int len;
 
 	len = 0;
 	if (!str)
-        return (0);
+	{
+		len += write(1, "(null)", 6);
+		return (len);
+	}
     while (*str)
 	{
 		len += write(1, str, 1);
@@ -107,7 +115,7 @@ int ft_printf(char *str, ...)
 
 /////////////////////////FUNCTIONS/////////////////////////
 
-int main(void)
+/*int main(void)
 {
     int len;
     char *s = "Holi";
@@ -121,4 +129,4 @@ int main(void)
     printf("len: %d\n", len);
     return (0);
 
-}
+}*/
